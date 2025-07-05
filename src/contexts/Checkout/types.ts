@@ -1,4 +1,4 @@
-export interface CartItem {
+export interface CheckoutItem {
   id: string
   name: string
   price: number
@@ -7,14 +7,14 @@ export interface CartItem {
 }
 
 export interface CartState {
-  items: CartItem[]
+  items: CheckoutItem[]
   isOpen: boolean
 }
 
 export interface CartContextType {
-  items: CartItem[]
+  items: CheckoutItem[]
   isOpen: boolean
-  addItem: (item: Omit<CartItem, 'quantity'>) => void
+  addItem: (item: Omit<CheckoutItem, 'quantity'>) => void
   removeItem: (id: string) => void
   updateQuantity: (id: string, quantity: number) => void
   clearCart: () => void

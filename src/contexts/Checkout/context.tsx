@@ -7,15 +7,15 @@ import {
   useMemo,
   useState
 } from 'react'
-import type { CartContextType, CartItem } from './types'
+import type { CartContextType, CheckoutItem } from './types'
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([])
+  const [items, setItems] = useState<CheckoutItem[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
-  const addItem = (item: Omit<CartItem, 'quantity'>) => {
+  const addItem = (item: Omit<CheckoutItem, 'quantity'>) => {
     setItems(prevItems => {
       const existingItem = prevItems.find(prevItem => prevItem.id === item.id)
 
