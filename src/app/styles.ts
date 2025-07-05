@@ -9,7 +9,6 @@ export const S = {
     'flex',
     'justify-center',
     'w-full',
-    'border-b',
     'bg-gray-800/80',
     'border-t-4',
     'border-t-yellow-500'

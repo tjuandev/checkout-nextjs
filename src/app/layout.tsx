@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import '../theme/globals.css'
+import 'theme/globals.css'
 import { Button } from 'components/atoms/Button/Button'
-import Cart from '../assets/icons/cart.svg'
+import { ShoppingCart } from 'lucide-react'
 import { S } from './styles'
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default function RootLayout({
               size="icon"
               aria-label="checkout cart"
             >
-              <Cart className={S.cartIcon} />
+              <ShoppingCart className={S.cartIcon} />
             </Button>
           </div>
         </header>
