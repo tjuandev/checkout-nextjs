@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Image from 'next/image'
 import '../theme/globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Button } from 'components/atoms/Button/Button'
+import Cart from '../assets/icons/cart.svg'
+import { S } from './styles'
 
 export const metadata: Metadata = {
   title: 'Game Store',
@@ -17,19 +16,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <header className="flex justify-center w-full border-b bg-gray-900/90 border-t-4 border-t-yellow-500">
-          <div className="flex items-center gap-2 w-full max-w-8xl p-4">
-            <Image
-              src="/logo.png"
-              alt="Video Game Store"
-              width={32}
-              height={32}
-            />
-            <h1 className="text-white text-xl font-bold">Game Store</h1>
+      <body className={S.body}>
+        <header className={S.header}>
+          <div className={S.headerContent}>
+            <div className={S.logo}>
+              <h1 className={S.headerTitle}>Game Store</h1>
+            </div>
+            <Button
+              variant="ghost"
+              className={S.cart}
+              size="icon"
+              aria-label="checkout cart"
+            >
+              <Cart className={S.cartIcon} />
+            </Button>
           </div>
         </header>
-        <main>{children}</main>
+        <main className={S.main}>
+          <div className={S.content}>{children}</div>
+        </main>
       </body>
     </html>
   )
