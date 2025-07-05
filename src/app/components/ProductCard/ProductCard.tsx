@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from '@/components/ui/card'
+} from '@/components/molecules/Card/Card'
 import { useCart } from '@/contexts/Checkout/context'
 import { Plus } from 'lucide-react'
 import Image from 'next/image'
