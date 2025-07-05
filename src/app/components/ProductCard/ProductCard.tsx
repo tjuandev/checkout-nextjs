@@ -89,7 +89,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <Button
             onClick={handleAddToCart}
             size="sm"
-            className={S.footer.addToCartButton}
+            className={S.footer.addToCheckoutButton}
           >
             <Plus className={S.footer.plusIcon} />
             Add to Cart

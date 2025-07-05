@@ -48,7 +48,7 @@ const card = {
     priceContainer: clsx('flex', 'flex-col'),
     price: clsx('text-2xl', 'font-bold', 'text-white'),
     downloadText: clsx('text-xs', 'text-gray-500'),
-    addToCartButton: clsx(
+    addToCheckoutButton: clsx(
       'bg-yellow-500',
       'hover:bg-yellow-600',
       'text-gray-900',
