@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const S = {
+export const layoutS = {
   body: clsx(inter.className, 'bg-gray-900'),
   header: clsx(
     'flex',
@@ -34,4 +34,17 @@ export const S = {
   cartIcon: clsx('size-6'),
   main: clsx('flex', 'justify-center', 'w-full'),
   content: clsx('w-full', 'max-w-8xl', 'p-4')
+}
+
+export const pageS = {
+  container: clsx('space-y-8'),
+  grid: clsx(
+    'grid',
+    'grid-cols-1',
+    'md:grid-cols-2',
+    'lg:grid-cols-4',
+    'gap-6'
+  ),
+  emptyState: clsx('text-center', 'py-12'),
+  emptyStateText: clsx('text-gray-400', 'text-lg')
 }

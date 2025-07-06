@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import 'theme/globals.css'
-import { Button } from 'components/atoms/Button/Button'
-import { ShoppingCart } from 'lucide-react'
-import { S } from './styles'
+import { CheckoutButton } from '@/app/components/CheckoutButton/CheckoutButton'
+import { CheckoutDrawer } from '@/app/components/CheckoutDrawer/CheckoutDrawer'
+import { CartProvider } from '@/contexts/Checkout/context'
+import { layoutS } from './styles'
 
 export const metadata: Metadata = {
   title: 'Game Store',
@@ -16,25 +17,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={S.body}>
-        <header className={S.header}>
-          <div className={S.headerContent}>
-            <div className={S.logo}>
-              <h1 className={S.headerTitle}>Game Store</h1>
+      <body className={layoutS.body}>
+        <CartProvider>
+          <header className={layoutS.header}>
+            <div className={layoutS.headerContent}>
+              <div className={layoutS.logo}>
+                <h1 className={layoutS.headerTitle}>Game Store</h1>
+              </div>
+              <CheckoutButton className={layoutS.cart} />
             </div>
-            <Button
-              variant="ghost"
-              className={S.cart}
-              size="icon"
-              aria-label="checkout cart"
-            >
-              <ShoppingCart className={S.cartIcon} />
-            </Button>
-          </div>
-        </header>
-        <main className={S.main}>
-          <div className={S.content}>{children}</div>
-        </main>
+          </header>
+          <main className={layoutS.main}>
+            <div className={layoutS.content}>{children}</div>
+          </main>
+          <CheckoutDrawer />
+        </CartProvider>
       </body>
     </html>
   )
