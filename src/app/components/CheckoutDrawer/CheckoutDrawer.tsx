@@ -9,8 +9,8 @@ import {
   DrawerHeader,
   DrawerTitle
 } from '@/components/molecules/Drawer/Drawer'
-import { useCart } from '@/contexts/Checkout/context'
-import { Minus, Plus, ShoppingCart, Trash2, X } from 'lucide-react'
+import { useCheckout } from '@/contexts/Checkout/context'
+import { ShoppingCart, Trash2, X } from 'lucide-react'
 import { S } from './styles'
 import type {
   CheckoutDrawerBodyProps,
@@ -37,11 +37,7 @@ function CheckoutDrawerHeader({ totalItems }: CheckoutDrawerHeaderProps) {
   )
 }
 
-function CheckoutDrawerBody({
-  items,
-  onRemoveItem,
-  onUpdateQuantity
-}: CheckoutDrawerBodyProps) {
+function CheckoutDrawerBody({ items, onRemoveItem }: CheckoutDrawerBodyProps) {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -79,31 +75,6 @@ function CheckoutDrawerBody({
               </div>
 
               <div className={S.content.item.controls}>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={S.content.item.quantityButton}
-                  onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                  disabled={item.quantity <= 1}
-                >
-                  <Minus className={S.content.item.minusIcon} />
-                  <span className="sr-only">Decrease quantity</span>
-                </Button>
-
-                <span className={S.content.item.quantityText}>
-                  {item.quantity}
-                </span>
-
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={S.content.item.quantityButton}
-                  onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-                >
-                  <Plus className={S.content.item.plusIcon} />
-                  <span className="sr-only">Increase quantity</span>
-                </Button>
-
                 <Button
                   variant="ghost"
                   size="icon"
@@ -164,22 +135,17 @@ export function CheckoutDrawer() {
     isOpen,
     closeCart,
     removeItem,
-    updateQuantity,
     clearCart,
     totalItems,
     totalPrice
-  } = useCart()
+  } = useCheckout()
 
   return (
     <Drawer open={isOpen} onOpenChange={closeCart} direction="right">
       <DrawerContent className={S.drawer}>
         <CheckoutDrawerHeader totalItems={totalItems} />
 
-        <CheckoutDrawerBody
-          items={items}
-          onRemoveItem={removeItem}
-          onUpdateQuantity={updateQuantity}
-        />
+        <CheckoutDrawerBody items={items} onRemoveItem={removeItem} />
 
         {items.length > 0 && (
           <CheckoutDrawerFooter

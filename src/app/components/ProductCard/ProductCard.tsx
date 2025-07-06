@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/molecules/Card/Card'
-import { useCart } from '@/contexts/Checkout/context'
+import { useCheckout } from '@/contexts/Checkout/context'
 import { Plus } from 'lucide-react'
 import Image from 'next/image'
 import { S } from './styles'
@@ -35,7 +35,7 @@ const CardImage = ({ src, alt }: CardImageProps) => {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { addItem } = useCart()
+  const { addItem } = useCheckout()
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {

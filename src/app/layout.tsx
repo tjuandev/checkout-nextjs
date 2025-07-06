@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import 'theme/globals.css'
 import { CheckoutButton } from '@/app/components/CheckoutButton/CheckoutButton'
 import { CheckoutDrawer } from '@/app/components/CheckoutDrawer/CheckoutDrawer'
-import { CartProvider } from '@/contexts/Checkout/context'
+import { CheckoutProvider } from '@/contexts/Checkout/context'
 import { layoutS } from './styles'
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={layoutS.body}>
-        <CartProvider>
+        <CheckoutProvider>
           <header className={layoutS.header}>
             <div className={layoutS.headerContent}>
               <div className={layoutS.logo}>
@@ -31,7 +31,7 @@ export default function RootLayout({
             <div className={layoutS.content}>{children}</div>
           </main>
           <CheckoutDrawer />
-        </CartProvider>
+        </CheckoutProvider>
       </body>
     </html>
   )

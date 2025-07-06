@@ -7,11 +7,13 @@ import {
   useMemo,
   useState
 } from 'react'
-import type { CartContextType, CheckoutItem } from './types'
+import type { CheckoutContextType, CheckoutItem } from './types'
 
-const CartContext = createContext<CartContextType | undefined>(undefined)
+const CheckoutContext = createContext<CheckoutContextType | undefined>(
+  undefined
+)
 
-export function CartProvider({ children }: { children: ReactNode }) {
+export function CheckoutProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CheckoutItem[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
@@ -33,16 +35,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const removeItem = (id: string) => {
     setItems(prevItems => prevItems.filter(item => item.id !== id))
-  }
-
-  const updateQuantity = (id: string, quantity: number) => {
-    setItems(prevItems =>
-      prevItems
-        .map(item =>
-          item.id === id ? { ...item, quantity: Math.max(0, quantity) } : item
-        )
-        .filter(item => item.quantity > 0)
-    )
   }
 
   const clearCart = () => {
@@ -69,7 +61,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
       isOpen,
       addItem,
       removeItem,
-      updateQuantity,
       clearCart,
       openCart,
       closeCart,
@@ -78,13 +69,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, isOpen])
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
+  return (
+    <CheckoutContext.Provider value={value}>
+      {children}
+    </CheckoutContext.Provider>
+  )
 }
 
-export function useCart() {
-  const context = useContext(CartContext)
+export function useCheckout() {
+  const context = useContext(CheckoutContext)
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider')
+    throw new Error('useCheckout must be used within a CheckoutProvider')
   }
   return context
 }

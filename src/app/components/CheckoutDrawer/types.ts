@@ -5,7 +5,6 @@ export interface CheckoutDrawerHeaderProps {
 export interface CheckoutDrawerBodyProps {
   items: any[]
   onRemoveItem: (id: string) => void
-  onUpdateQuantity: (id: string, quantity: number) => void
 }
 
 export interface CheckoutDrawerFooterProps {

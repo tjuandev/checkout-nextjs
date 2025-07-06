@@ -1,6 +1,6 @@
 'use client'
 
-import { useCart } from '@/contexts/Checkout/context'
+import { useCheckout } from '@/contexts/Checkout/context'
 import { cn } from '@/helpers/cn'
 import { ShoppingCart } from 'lucide-react'
 import { Button } from '../../../components/atoms/Button/Button'
@@ -11,7 +11,7 @@ interface CheckoutButtonProps {
 }
 
 export function CheckoutButton({ className }: CheckoutButtonProps) {
-  const { openCart, totalItems } = useCart()
+  const { openCart, totalItems } = useCheckout()
 
   return (
     <Button

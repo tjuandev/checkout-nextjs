@@ -6,17 +6,16 @@ export interface CheckoutItem {
   image?: string
 }
 
-export interface CartState {
+export interface CheckoutState {
   items: CheckoutItem[]
   isOpen: boolean
 }
 
-export interface CartContextType {
+export interface CheckoutContextType {
   items: CheckoutItem[]
   isOpen: boolean
   addItem: (item: Omit<CheckoutItem, 'quantity'>) => void
   removeItem: (id: string) => void
-  updateQuantity: (id: string, quantity: number) => void
   clearCart: () => void
   openCart: () => void
   closeCart: () => void
