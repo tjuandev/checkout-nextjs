@@ -1,7 +1,7 @@
 'use client'
 
 import { useCart } from '@/contexts/Checkout/context'
-import { cn } from '@/lib/utils'
+import { cn } from '@/helpers/cn'
 import { ShoppingCart } from 'lucide-react'
 import { Button } from '../../../components/atoms/Button/Button'
 import { S } from './styles'

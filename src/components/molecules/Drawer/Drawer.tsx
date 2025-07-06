@@ -2,7 +2,7 @@
 
 import { Drawer as DrawerPrimitive } from 'vaul'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/helpers/cn'
 import { S } from './styles'
 import type {
   DrawerCloseProps,
