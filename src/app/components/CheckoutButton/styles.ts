@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-const checkoutButton = {
+export const S = {
   button: clsx('relative'),
   icon: clsx('size-6'),
   badge: clsx(
@@ -18,5 +18,3 @@ const checkoutButton = {
     'justify-center'
   )
 }
-
-export const S = checkoutButton

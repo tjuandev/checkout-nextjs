@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-const card = {
+export const S = {
   card: clsx('bg-gray-900', 'border-gray-800', 'overflow-hidden'),
   image: {
     container: clsx(
@@ -64,5 +64,3 @@ const card = {
     plusIcon: clsx('size-4', 'mr-2')
   }
 }
-
-export const S = card

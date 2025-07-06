@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-const card = {
+export const S = {
   card: clsx(
     'bg-card',
     'text-card-foreground',
@@ -35,5 +35,3 @@ const card = {
   content: clsx('px-6'),
   footer: clsx('flex', 'items-center', 'px-6', '[.border-t]:pt-6')
 }
-
-export const S = card

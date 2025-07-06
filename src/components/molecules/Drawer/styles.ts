@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-const drawer = {
+export const S = {
   overlay: clsx(
     'data-[state=open]:animate-in',
     'data-[state=closed]:animate-out',
@@ -67,5 +67,3 @@ const drawer = {
   title: clsx('text-foreground', 'font-semibold'),
   description: clsx('text-muted-foreground', 'text-sm')
 }
-
-export const S = drawer
