@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/atoms/Button/Button'
+import { Switch } from '@/components/atoms/Switch/Switch'
 import {
   Drawer,
   DrawerClose,
@@ -19,6 +20,8 @@ import type {
 } from './types'
 
 function CheckoutDrawerHeader({ totalItems }: CheckoutDrawerHeaderProps) {
+  const { isVipClient, setIsVipClient } = useCheckout()
+
   return (
     <DrawerHeader className={S.header.container}>
       <div className={S.header.content}>
@@ -26,12 +29,26 @@ function CheckoutDrawerHeader({ totalItems }: CheckoutDrawerHeaderProps) {
           <ShoppingCart className={S.header.titleIcon} />
           Shopping Cart ({totalItems})
         </DrawerTitle>
-        <DrawerClose asChild>
-          <Button variant="ghost" size="icon" className={S.header.closeButton}>
-            <X className={S.header.closeIcon} />
-            <span className="sr-only">Close cart</span>
-          </Button>
-        </DrawerClose>
+        <div className={S.header.controls}>
+          <div className={S.header.vipMode}>
+            <span className={S.header.vipLabel}>VIP Mode</span>
+            <Switch
+              checked={isVipClient}
+              onCheckedChange={setIsVipClient}
+              className={S.header.vipSwitch}
+            />
+          </div>
+          <DrawerClose asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className={S.header.closeButton}
+            >
+              <X className={S.header.closeIcon} />
+              <span className="sr-only">Close cart</span>
+            </Button>
+          </DrawerClose>
+        </div>
       </div>
     </DrawerHeader>
   )

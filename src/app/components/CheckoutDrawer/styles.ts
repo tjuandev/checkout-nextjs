@@ -19,6 +19,10 @@ export const S = {
     content: clsx('flex', 'items-center', 'justify-between'),
     title: clsx('flex', 'items-center', 'gap-2', 'text-white'),
     titleIcon: clsx('size-5', 'text-yellow-500'),
+    controls: clsx('flex', 'items-center', 'gap-4'),
+    vipMode: clsx('flex', 'items-center', 'gap-2'),
+    vipLabel: clsx('text-sm', 'text-gray-300', 'font-medium'),
+    vipSwitch: clsx('data-[state=checked]:bg-purple-500'),
     closeButton: clsx(
       'size-8',
       'text-gray-400',

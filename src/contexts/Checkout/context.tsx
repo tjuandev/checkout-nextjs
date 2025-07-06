@@ -16,6 +16,7 @@ const CheckoutContext = createContext<CheckoutContextType | undefined>(
 export function CheckoutProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CheckoutItem[]>([])
   const [isOpen, setIsOpen] = useState(false)
+  const [isVipClient, setIsVipClient] = useState(false)
 
   const addItem = (item: Omit<CheckoutItem, 'quantity'>) => {
     setItems(prevItems => {
@@ -59,15 +60,17 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
     return {
       items,
       isOpen,
+      isVipClient,
       addItem,
       removeItem,
       clearCart,
       openCart,
       closeCart,
+      setIsVipClient,
       totalItems,
       totalPrice
     }
-  }, [items, isOpen])
+  }, [items, isOpen, isVipClient])
 
   return (
     <CheckoutContext.Provider value={value}>

@@ -9,16 +9,19 @@ export interface CheckoutItem {
 export interface CheckoutState {
   items: CheckoutItem[]
   isOpen: boolean
+  isVipClient: boolean
 }
 
 export interface CheckoutContextType {
   items: CheckoutItem[]
   isOpen: boolean
+  isVipClient: boolean
   addItem: (item: Omit<CheckoutItem, 'quantity'>) => void
   removeItem: (id: string) => void
   clearCart: () => void
   openCart: () => void
   closeCart: () => void
+  setIsVipClient: (isVip: boolean) => void
   totalItems: number
   totalPrice: number
 }
