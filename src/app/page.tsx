@@ -1,5 +1,5 @@
 import { getGamesList } from '@/services/games/get/api'
-import { ProductCard } from './components/ProductCard/ProductCard'
+import { ProductGrid } from './components/ProductGrid/ProductGrid'
 import { pageS } from './styles'
 
 export default async function HomePage() {
@@ -8,21 +8,7 @@ export default async function HomePage() {
   return (
     <div className={pageS.container}>
       {games.length > 0 ? (
-        <div className={pageS.grid}>
-          {games.map(game => (
-            <ProductCard
-              key={game.id}
-              product={{
-                id: game.id.toString(),
-                name: game.name,
-                price: game.price || 29.99,
-                image: game.background_image,
-                rating: game.rating,
-                released: game.released
-              }}
-            />
-          ))}
-        </div>
+        <ProductGrid games={games} />
       ) : (
         <div className={pageS.emptyState}>
           <p className={pageS.emptyStateText}>

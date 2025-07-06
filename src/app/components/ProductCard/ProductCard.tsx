@@ -9,7 +9,7 @@ import {
   CardTitle
 } from '@/components/molecules/Card/Card'
 import { useCheckout } from '@/contexts/Checkout/context'
-import { Plus } from 'lucide-react'
+import { Plus, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import { S } from './styles'
 import type { CardImageProps, ProductCardProps } from './types'
@@ -34,7 +34,10 @@ const CardImage = ({ src, alt }: CardImageProps) => {
   )
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({
+  product,
+  isAlreadyInCheckout
+}: ProductCardProps) {
   const { addItem } = useCheckout()
 
   const formatPrice = (price: number) => {
@@ -87,12 +90,21 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           <Button
-            onClick={handleAddToCart}
+            onClick={isAlreadyInCheckout ? undefined : handleAddToCart}
             size="sm"
-            className={S.footer.addToCheckoutButton}
+            className={S.footer.addToCheckoutButton(isAlreadyInCheckout)}
           >
-            <Plus className={S.footer.plusIcon} />
-            Add to Cart
+            {isAlreadyInCheckout ? (
+              <>
+                <ShoppingCart className={S.footer.plusIcon} />
+                Already in Cart
+              </>
+            ) : (
+              <>
+                <Plus className={S.footer.plusIcon} />
+                Add to Cart
+              </>
+            )}
           </Button>
         </div>
       </CardFooter>

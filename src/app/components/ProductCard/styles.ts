@@ -48,19 +48,20 @@ export const S = {
     priceContainer: clsx('flex', 'flex-col'),
     price: clsx('text-2xl', 'font-bold', 'text-white'),
     downloadText: clsx('text-xs', 'text-gray-500'),
-    addToCheckoutButton: clsx(
-      'bg-yellow-500',
-      'hover:bg-yellow-600',
-      'text-gray-900',
-      'font-semibold',
-      'px-4',
-      'py-2',
-      'rounded-lg',
-      'transition-all',
-      'duration-200',
-      'hover:shadow-lg',
-      'hover:shadow-yellow-500/25'
-    ),
+    addToCheckoutButton: (isAlreadyInCheckout: boolean) =>
+      clsx(
+        isAlreadyInCheckout ? 'bg-green-500' : 'bg-yellow-500',
+        isAlreadyInCheckout ? 'hover:bg-green-600' : 'hover:bg-yellow-600',
+        'text-gray-900',
+        'font-semibold',
+        'px-4',
+        'py-2',
+        'rounded-lg',
+        'transition-all',
+        'duration-200',
+        'hover:shadow-lg',
+        'hover:shadow-yellow-500/25'
+      ),
     plusIcon: clsx('size-4', 'mr-2')
   }
 }

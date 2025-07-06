@@ -5,6 +5,7 @@ export interface ProductCardProps {
     rating?: number
     released?: string
   }
+  isAlreadyInCheckout: boolean
 }
 
 export interface CardImageProps {
