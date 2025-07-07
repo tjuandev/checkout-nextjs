@@ -11,7 +11,6 @@ export interface CheckoutDrawerFooterProps {
   totalPrice: number
   originalPrice: number
   saving: number
-  freeItemsCount: number
   appliedPromotion: boolean
   vipDiscount: number
   appliedVipDiscount: boolean

@@ -9,7 +9,6 @@ export interface PromotionDetails {
   originalPrice: number
   discountedPrice: number
   saving: number
-  freeItemsCount: number
   appliedPromotion: boolean
   vipDiscount: number
   appliedVipDiscount: boolean

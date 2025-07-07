@@ -7,7 +7,6 @@ export const calculatePromotion = (
   const totalItems = items.length
   const originalPrice = items.reduce((sum, item) => sum + item.price, 0)
 
-  // VIP customers get 15% discount but cannot combine with "buy 2 get 1 free" promotion
   if (isVipClient) {
     const vipDiscount = originalPrice * 0.15
     const discountedPrice = originalPrice - vipDiscount
@@ -16,7 +15,6 @@ export const calculatePromotion = (
       originalPrice,
       discountedPrice,
       saving: vipDiscount,
-      freeItemsCount: 0,
       appliedPromotion: false,
       vipDiscount,
       appliedVipDiscount: true
@@ -28,7 +26,6 @@ export const calculatePromotion = (
       originalPrice,
       discountedPrice: originalPrice,
       saving: 0,
-      freeItemsCount: 0,
       appliedPromotion: false,
       vipDiscount: 0,
       appliedVipDiscount: false
@@ -42,8 +39,6 @@ export const calculatePromotion = (
 
   allItems.sort((a, b) => a.price - b.price)
 
-  const freeItemsCount = 1
-
   const saving = allItems?.[0]?.price ?? 0
 
   const discountedPrice = originalPrice - saving
@@ -52,8 +47,7 @@ export const calculatePromotion = (
     originalPrice,
     discountedPrice,
     saving,
-    freeItemsCount,
-    appliedPromotion: freeItemsCount > 0,
+    appliedPromotion: saving > 0,
     vipDiscount: 0,
     appliedVipDiscount: false
   }

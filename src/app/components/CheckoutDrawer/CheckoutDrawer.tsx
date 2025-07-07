@@ -23,7 +23,6 @@ interface PromotionDisplayProps {
   appliedPromotion: boolean
   appliedVipDiscount: boolean
   saving: number
-  freeItemsCount: number
   originalPrice: number
   totalPrice: number
   vipDiscount: number
@@ -124,7 +123,6 @@ function PromotionDisplay({
   appliedPromotion,
   appliedVipDiscount,
   saving,
-  freeItemsCount,
   originalPrice,
   totalPrice,
   vipDiscount
@@ -152,7 +150,7 @@ function PromotionDisplay({
         <span className={S.footer.promotion.saving}>
           {appliedVipDiscount
             ? `You save ${formatPrice(vipDiscount)} (VIP exclusive!)`
-            : `You save ${formatPrice(saving)} (${freeItemsCount} item${freeItemsCount > 1 ? 's' : ''} free!)`}
+            : `You save ${formatPrice(saving)}!`}
         </span>
         &nbsp;
         {originalPrice !== totalPrice && (
@@ -169,7 +167,6 @@ function CheckoutDrawerFooter({
   totalPrice,
   originalPrice,
   saving,
-  freeItemsCount,
   appliedPromotion,
   vipDiscount,
   appliedVipDiscount,
@@ -189,7 +186,6 @@ function CheckoutDrawerFooter({
           appliedPromotion={appliedPromotion}
           appliedVipDiscount={appliedVipDiscount}
           saving={saving}
-          freeItemsCount={freeItemsCount}
           originalPrice={originalPrice}
           totalPrice={totalPrice}
           vipDiscount={vipDiscount}
@@ -241,7 +237,6 @@ export function CheckoutDrawer() {
             totalPrice={totalPrice}
             originalPrice={promotionDetails.originalPrice}
             saving={promotionDetails.saving}
-            freeItemsCount={promotionDetails.freeItemsCount}
             appliedPromotion={promotionDetails.appliedPromotion}
             vipDiscount={promotionDetails.vipDiscount}
             appliedVipDiscount={promotionDetails.appliedVipDiscount}
