@@ -52,7 +52,7 @@ export function ProductCard({
   }
 
   return (
-    <Card className={S.card}>
+    <Card className={S.card} data-testid={`product-card-${product.id}`}>
       <CardImage src={product.image ?? ''} alt={product.name} />
 
       <CardHeader className={S.header.container}>
@@ -87,7 +87,12 @@ export function ProductCard({
       <CardFooter className={S.footer.container}>
         <div className={S.footer.content}>
           <div className={S.footer.priceContainer}>
-            <span className={S.footer.price}>{formatPrice(product.price)}</span>
+            <span
+              className={S.footer.price}
+              data-testid={`product-price-${product.id}`}
+            >
+              {formatPrice(product.price)}
+            </span>
             <span className={S.footer.downloadText}>Digital Download</span>
           </div>
 
@@ -95,6 +100,7 @@ export function ProductCard({
             onClick={isAlreadyInCheckout ? undefined : handleAddToCart}
             size="sm"
             className={S.footer.addToCheckoutButton(isAlreadyInCheckout)}
+            data-testid={`add-to-cart-${product.id}`}
           >
             {isAlreadyInCheckout ? (
               <>

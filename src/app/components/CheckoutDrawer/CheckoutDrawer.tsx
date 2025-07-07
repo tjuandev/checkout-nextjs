@@ -45,6 +45,7 @@ function CheckoutDrawerHeader({ totalItems }: CheckoutDrawerHeaderProps) {
               checked={isVipClient}
               onCheckedChange={setIsVipClient}
               className={S.header.vipSwitch}
+              data-testid="vip-switch"
             />
           </div>
           <DrawerClose asChild>
@@ -74,7 +75,10 @@ function CheckoutDrawerBody({ items, onRemoveItem }: CheckoutDrawerBodyProps) {
   return (
     <div className={S.content.container}>
       {items.length === 0 ? (
-        <div className={S.content.emptyState.container}>
+        <div
+          className={S.content.emptyState.container}
+          data-testid="empty-cart"
+        >
           <ShoppingCart className={S.content.emptyState.icon} />
           <h3 className={S.content.emptyState.title}>Your cart is empty</h3>
           <p className={S.content.emptyState.description}>
@@ -84,7 +88,11 @@ function CheckoutDrawerBody({ items, onRemoveItem }: CheckoutDrawerBodyProps) {
       ) : (
         <div className={S.content.itemsList}>
           {items.map(item => (
-            <div key={item.id} className={S.content.item.container}>
+            <div
+              key={item.id}
+              className={S.content.item.container}
+              data-testid={`cart-item-${item.id}`}
+            >
               {item.image && (
                 <img
                   src={item.image}
@@ -95,7 +103,10 @@ function CheckoutDrawerBody({ items, onRemoveItem }: CheckoutDrawerBodyProps) {
 
               <div className={S.content.item.content}>
                 <h4 className={S.content.item.title}>{item.name}</h4>
-                <p className={S.content.item.price}>
+                <p
+                  className={S.content.item.price}
+                  data-testid={`cart-item-price-${item.id}`}
+                >
                   {formatPrice(item.price)}
                 </p>
               </div>
@@ -106,6 +117,7 @@ function CheckoutDrawerBody({ items, onRemoveItem }: CheckoutDrawerBodyProps) {
                   size="icon"
                   className={S.content.item.removeButton}
                   onClick={() => onRemoveItem(item.id)}
+                  data-testid={`remove-item-${item.id}`}
                 >
                   <Trash2 className={S.content.item.trashIcon} />
                   <span className="sr-only">Remove item</span>
@@ -137,7 +149,10 @@ function PromotionDisplay({
   if (!appliedPromotion && !appliedVipDiscount) return null
 
   return (
-    <div className={S.footer.promotion.container(appliedVipDiscount)}>
+    <div
+      className={S.footer.promotion.container(appliedVipDiscount)}
+      data-testid="promotion-display"
+    >
       <div className={S.footer.promotion.badge}>
         <Gift className={S.footer.promotion.icon} />
         <span>
@@ -193,7 +208,7 @@ function CheckoutDrawerFooter({
 
         <div className={S.footer.total.container}>
           <span className={S.footer.total.label}>Total:</span>
-          <span className={S.footer.total.value}>
+          <span className={S.footer.total.value} data-testid="cart-total">
             {formatPrice(totalPrice)}
           </span>
         </div>
@@ -203,10 +218,16 @@ function CheckoutDrawerFooter({
             variant="ghost"
             onClick={onClearCart}
             className={S.footer.clearButton}
+            data-testid="clear-cart-button"
           >
             Clear Cart
           </Button>
-          <Button className={S.footer.checkoutButton}>Checkout</Button>
+          <Button
+            className={S.footer.checkoutButton}
+            data-testid="checkout-button-drawer"
+          >
+            Checkout
+          </Button>
         </div>
       </div>
     </DrawerFooter>
@@ -227,7 +248,7 @@ export function CheckoutDrawer() {
 
   return (
     <Drawer open={isOpen} onOpenChange={closeCart} direction="right">
-      <DrawerContent className={S.drawer}>
+      <DrawerContent className={S.drawer} data-testid="checkout-drawer">
         <CheckoutDrawerHeader totalItems={totalItems} />
 
         <CheckoutDrawerBody items={items} onRemoveItem={removeItem} />

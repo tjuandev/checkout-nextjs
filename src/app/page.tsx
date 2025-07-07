@@ -1,9 +1,42 @@
+'use client'
+
 import { getGamesList } from '@/services/games/get/api'
+import type { Game } from '@/types/game'
+import { useEffect, useState } from 'react'
 import { ProductGrid } from './components/ProductGrid/ProductGrid'
 import { pageS } from './styles'
 
-export default async function HomePage() {
-  const games = await getGamesList()
+export default function HomePage() {
+  const [games, setGames] = useState<Game[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        setLoading(true)
+        const gamesData = await getGamesList()
+        setGames(gamesData)
+        setError(false)
+      } catch (err) {
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchGames()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className={pageS.container}>
+        <div className={pageS.emptyState}>
+          <p className={pageS.emptyStateText}>Loading games...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={pageS.container}>
@@ -12,7 +45,9 @@ export default async function HomePage() {
       ) : (
         <div className={pageS.emptyState}>
           <p className={pageS.emptyStateText}>
-            Failed to load games. Please try again later.
+            {error
+              ? 'Failed to load games. Please try again later.'
+              : 'No games available.'}
           </p>
         </div>
       )}

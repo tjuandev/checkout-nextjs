@@ -1,14 +1,13 @@
 import type { Game, GamesApiResponse } from '@/types/game'
 
-function generateRandomPrice(): number {
-  const min = 9.99
-  const max = 69.99
-  return Math.round((Math.random() * (max - min) + min) * 100) / 100
-}
+const MOCK_PRICES_FOR_FIRST_20_GAMES = [
+  59.99, 49.99, 39.99, 29.99, 19.99, 9.99, 69.99, 59.99, 49.99, 39.99, 29.99,
+  19.99, 9.99, 69.99, 59.99, 49.99, 39.99, 29.99, 19.99, 9.99
+]
 
 export function adaptGames(games: GamesApiResponse): Game[] {
-  return games.results.map((game: Game) => ({
+  return games.results.map((game: Game, index: number) => ({
     ...game,
-    price: generateRandomPrice()
+    price: MOCK_PRICES_FOR_FIRST_20_GAMES[index]
   }))
 }

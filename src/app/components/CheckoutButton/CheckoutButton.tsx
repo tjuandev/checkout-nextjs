@@ -20,10 +20,13 @@ export function CheckoutButton({ className }: CheckoutButtonProps) {
       size="icon"
       onClick={openCart}
       aria-label={`Shopping cart with ${totalItems} items`}
+      data-testid="checkout-button"
     >
       <ShoppingCart className={S.icon} />
       {totalItems > 0 && (
-        <span className={S.badge}>{totalItems > 99 ? '99+' : totalItems}</span>
+        <span className={S.badge} data-testid="cart-badge">
+          {totalItems > 99 ? '99+' : totalItems}
+        </span>
       )}
     </Button>
   )

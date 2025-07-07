@@ -13,7 +13,7 @@ export function ProductGrid({ games }: ProductGridProps) {
   const { items } = useCheckout()
 
   return (
-    <div className={pageS.grid}>
+    <div className={pageS.grid} data-testid="product-grid">
       {games.map(game => (
         <ProductCard
           key={game.id}
