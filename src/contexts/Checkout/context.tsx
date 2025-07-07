@@ -51,7 +51,7 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(() => {
     const totalItems = items.length
-    const promotionDetails = calculatePromotion(items)
+    const promotionDetails = calculatePromotion(items, isVipClient)
 
     return {
       items,

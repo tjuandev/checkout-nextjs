@@ -13,5 +13,7 @@ export interface CheckoutDrawerFooterProps {
   saving: number
   freeItemsCount: number
   appliedPromotion: boolean
+  vipDiscount: number
+  appliedVipDiscount: boolean
   onClearCart: () => void
 }

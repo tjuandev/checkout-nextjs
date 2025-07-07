@@ -21,10 +21,12 @@ import type {
 
 interface PromotionDisplayProps {
   appliedPromotion: boolean
+  appliedVipDiscount: boolean
   saving: number
   freeItemsCount: number
   originalPrice: number
   totalPrice: number
+  vipDiscount: number
 }
 
 function CheckoutDrawerHeader({ totalItems }: CheckoutDrawerHeaderProps) {
@@ -120,10 +122,12 @@ function CheckoutDrawerBody({ items, onRemoveItem }: CheckoutDrawerBodyProps) {
 
 function PromotionDisplay({
   appliedPromotion,
+  appliedVipDiscount,
   saving,
   freeItemsCount,
   originalPrice,
-  totalPrice
+  totalPrice,
+  vipDiscount
 }: PromotionDisplayProps) {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -132,18 +136,23 @@ function PromotionDisplay({
     }).format(price)
   }
 
-  if (!appliedPromotion) return null
+  if (!appliedPromotion && !appliedVipDiscount) return null
 
   return (
-    <div className={S.footer.promotion.container}>
+    <div className={S.footer.promotion.container(appliedVipDiscount)}>
       <div className={S.footer.promotion.badge}>
         <Gift className={S.footer.promotion.icon} />
-        <span>Get 3 for the Price of 2!</span>
+        <span>
+          {appliedVipDiscount
+            ? 'VIP Discount - 15% Off!'
+            : 'Get 3 for the Price of 2!'}
+        </span>
       </div>
       <div className={S.footer.promotion.details}>
         <span className={S.footer.promotion.saving}>
-          You save {formatPrice(saving)} ({freeItemsCount} item
-          {freeItemsCount > 1 ? 's' : ''} free!)
+          {appliedVipDiscount
+            ? `You save ${formatPrice(vipDiscount)} (VIP exclusive!)`
+            : `You save ${formatPrice(saving)} (${freeItemsCount} item${freeItemsCount > 1 ? 's' : ''} free!)`}
         </span>
         &nbsp;
         {originalPrice !== totalPrice && (
@@ -162,6 +171,8 @@ function CheckoutDrawerFooter({
   saving,
   freeItemsCount,
   appliedPromotion,
+  vipDiscount,
+  appliedVipDiscount,
   onClearCart
 }: CheckoutDrawerFooterProps) {
   const formatPrice = (price: number) => {
@@ -176,10 +187,12 @@ function CheckoutDrawerFooter({
       <div className={S.footer.content}>
         <PromotionDisplay
           appliedPromotion={appliedPromotion}
+          appliedVipDiscount={appliedVipDiscount}
           saving={saving}
           freeItemsCount={freeItemsCount}
           originalPrice={originalPrice}
           totalPrice={totalPrice}
+          vipDiscount={vipDiscount}
         />
 
         <div className={S.footer.total.container}>
@@ -230,6 +243,8 @@ export function CheckoutDrawer() {
             saving={promotionDetails.saving}
             freeItemsCount={promotionDetails.freeItemsCount}
             appliedPromotion={promotionDetails.appliedPromotion}
+            vipDiscount={promotionDetails.vipDiscount}
+            appliedVipDiscount={promotionDetails.appliedVipDiscount}
             onClearCart={clearCart}
           />
         )}

@@ -94,13 +94,14 @@ export const S = {
     container: clsx('border-t', 'border-gray-700', 'bg-gray-800/80'),
     content: clsx('space-y-4'),
     promotion: {
-      container: clsx(
-        'p-3',
-        'bg-green-500/10',
-        'border',
-        'border-green-500/20',
-        'rounded-lg'
-      ),
+      container: (appliedVipDiscount: boolean) =>
+        clsx(
+          'p-3',
+          appliedVipDiscount ? 'bg-purple-500/10' : 'bg-green-500/10',
+          'border',
+          appliedVipDiscount ? 'border-purple-500/20' : 'border-green-500/20',
+          'rounded-lg'
+        ),
       badge: clsx(
         'flex',
         'items-center',
@@ -113,6 +114,28 @@ export const S = {
       icon: clsx('size-4'),
       details: clsx('space-y-1'),
       saving: clsx('text-sm', 'text-green-300'),
+      originalPrice: clsx('text-sm', 'text-gray-400', 'line-through')
+    },
+    vipPromotion: {
+      container: clsx(
+        'p-3',
+        'bg-purple-500/10',
+        'border',
+        'border-purple-500/20',
+        'rounded-lg'
+      ),
+      badge: clsx(
+        'flex',
+        'items-center',
+        'gap-2',
+        'text-sm',
+        'font-semibold',
+        'text-purple-400',
+        'mb-2'
+      ),
+      icon: clsx('size-4'),
+      details: clsx('space-y-1'),
+      saving: clsx('text-sm', 'text-purple-300'),
       originalPrice: clsx('text-sm', 'text-gray-400', 'line-through')
     },
     total: {

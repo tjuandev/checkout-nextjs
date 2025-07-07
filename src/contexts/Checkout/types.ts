@@ -11,6 +11,8 @@ export interface PromotionDetails {
   saving: number
   freeItemsCount: number
   appliedPromotion: boolean
+  vipDiscount: number
+  appliedVipDiscount: boolean
 }
 
 export interface CheckoutState {
