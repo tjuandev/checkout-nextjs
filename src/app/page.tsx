@@ -11,6 +11,9 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
+  // NOTE: This is implemented as a Client Component to simplify Playwright testing.
+  // In production, using a Server Component (or server-side rendering) would be preferred
+  // to improve initial load performance and SEO by rendering game data on the server.
   useEffect(() => {
     const fetchGames = async () => {
       try {
