@@ -56,7 +56,9 @@ export function ProductCard({
       <CardImage src={product.image ?? ''} alt={product.name} />
 
       <CardHeader className={S.header.container}>
-        <CardTitle className={S.header.title}>{product.name}</CardTitle>
+        <CardTitle className={S.header.title} title={product.name}>
+          {product.name}
+        </CardTitle>
       </CardHeader>
 
       <CardContent className={S.content.container}>

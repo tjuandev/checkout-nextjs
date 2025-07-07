@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 
 export const S = {
-  card: clsx('bg-gray-900', 'border-gray-800', 'overflow-hidden'),
+  card: clsx('bg-gray-900', 'border-gray-800', 'overflow-hidden', 'gap-0'),
   image: {
     container: clsx(
       'relative',
@@ -24,8 +24,8 @@ export const S = {
     noImageText: clsx('text-gray-500', 'text-sm')
   },
   header: {
-    container: clsx('pb-4'),
-    title: clsx('text-lg', 'text-white', 'line-clamp-2')
+    container: clsx('py-4', 'h-20', 'overflow-hidden'),
+    title: clsx('text-lg', 'text-white', 'line-clamp-2', 'text-ellipsis')
   },
   content: {
     container: clsx('pt-0'),
