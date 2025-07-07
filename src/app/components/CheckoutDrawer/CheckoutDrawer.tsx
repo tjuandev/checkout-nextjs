@@ -11,13 +11,21 @@ import {
   DrawerTitle
 } from '@/components/molecules/Drawer/Drawer'
 import { useCheckout } from '@/contexts/Checkout/context'
-import { ShoppingCart, Trash2, X } from 'lucide-react'
+import { Gift, ShoppingCart, Trash2, X } from 'lucide-react'
 import { S } from './styles'
 import type {
   CheckoutDrawerBodyProps,
   CheckoutDrawerFooterProps,
   CheckoutDrawerHeaderProps
 } from './types'
+
+interface PromotionDisplayProps {
+  appliedPromotion: boolean
+  saving: number
+  freeItemsCount: number
+  originalPrice: number
+  totalPrice: number
+}
 
 function CheckoutDrawerHeader({ totalItems }: CheckoutDrawerHeaderProps) {
   const { isVipClient, setIsVipClient } = useCheckout()
@@ -110,8 +118,50 @@ function CheckoutDrawerBody({ items, onRemoveItem }: CheckoutDrawerBodyProps) {
   )
 }
 
+function PromotionDisplay({
+  appliedPromotion,
+  saving,
+  freeItemsCount,
+  originalPrice,
+  totalPrice
+}: PromotionDisplayProps) {
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(price)
+  }
+
+  if (!appliedPromotion) return null
+
+  return (
+    <div className={S.footer.promotion.container}>
+      <div className={S.footer.promotion.badge}>
+        <Gift className={S.footer.promotion.icon} />
+        <span>Get 3 for the Price of 2!</span>
+      </div>
+      <div className={S.footer.promotion.details}>
+        <span className={S.footer.promotion.saving}>
+          You save {formatPrice(saving)} ({freeItemsCount} item
+          {freeItemsCount > 1 ? 's' : ''} free!)
+        </span>
+        &nbsp;
+        {originalPrice !== totalPrice && (
+          <span className={S.footer.promotion.originalPrice}>
+            Original: {formatPrice(originalPrice)}
+          </span>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function CheckoutDrawerFooter({
   totalPrice,
+  originalPrice,
+  saving,
+  freeItemsCount,
+  appliedPromotion,
   onClearCart
 }: CheckoutDrawerFooterProps) {
   const formatPrice = (price: number) => {
@@ -124,6 +174,14 @@ function CheckoutDrawerFooter({
   return (
     <DrawerFooter className={S.footer.container}>
       <div className={S.footer.content}>
+        <PromotionDisplay
+          appliedPromotion={appliedPromotion}
+          saving={saving}
+          freeItemsCount={freeItemsCount}
+          originalPrice={originalPrice}
+          totalPrice={totalPrice}
+        />
+
         <div className={S.footer.total.container}>
           <span className={S.footer.total.label}>Total:</span>
           <span className={S.footer.total.value}>
@@ -154,7 +212,8 @@ export function CheckoutDrawer() {
     removeItem,
     clearCart,
     totalItems,
-    totalPrice
+    totalPrice,
+    promotionDetails
   } = useCheckout()
 
   return (
@@ -167,6 +226,10 @@ export function CheckoutDrawer() {
         {items.length > 0 && (
           <CheckoutDrawerFooter
             totalPrice={totalPrice}
+            originalPrice={promotionDetails.originalPrice}
+            saving={promotionDetails.saving}
+            freeItemsCount={promotionDetails.freeItemsCount}
+            appliedPromotion={promotionDetails.appliedPromotion}
             onClearCart={clearCart}
           />
         )}

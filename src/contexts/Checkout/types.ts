@@ -2,8 +2,15 @@ export interface CheckoutItem {
   id: string
   name: string
   price: number
-  quantity: number
   image?: string
+}
+
+export interface PromotionDetails {
+  originalPrice: number
+  discountedPrice: number
+  saving: number
+  freeItemsCount: number
+  appliedPromotion: boolean
 }
 
 export interface CheckoutState {
@@ -24,4 +31,5 @@ export interface CheckoutContextType {
   setIsVipClient: (isVip: boolean) => void
   totalItems: number
   totalPrice: number
+  promotionDetails: PromotionDetails
 }

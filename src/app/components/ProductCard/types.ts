@@ -1,7 +1,7 @@
 import type { CheckoutItem } from '@/contexts/Checkout/types'
 
 export interface ProductCardProps {
-  product: Omit<CheckoutItem, 'quantity'> & {
+  product: CheckoutItem & {
     rating?: number
     released?: string
   }

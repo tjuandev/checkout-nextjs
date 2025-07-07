@@ -7,6 +7,7 @@ import {
   useMemo,
   useState
 } from 'react'
+import { calculatePromotion } from './helpers'
 import type { CheckoutContextType, CheckoutItem } from './types'
 
 const CheckoutContext = createContext<CheckoutContextType | undefined>(
@@ -24,13 +25,11 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
 
       if (existingItem) {
         return prevItems.map(prevItem =>
-          prevItem.id === item.id
-            ? { ...prevItem, quantity: prevItem.quantity + 1 }
-            : prevItem
+          prevItem.id === item.id ? { ...prevItem } : prevItem
         )
       }
 
-      return [...prevItems, { ...item, quantity: 1 }]
+      return [...prevItems, { ...item }]
     })
   }
 
@@ -51,11 +50,8 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
   }
 
   const value = useMemo(() => {
-    const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
-    const totalPrice = items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    )
+    const totalItems = items.length
+    const promotionDetails = calculatePromotion(items)
 
     return {
       items,
@@ -68,7 +64,8 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
       closeCart,
       setIsVipClient,
       totalItems,
-      totalPrice
+      totalPrice: promotionDetails.discountedPrice,
+      promotionDetails
     }
   }, [items, isOpen, isVipClient])
 

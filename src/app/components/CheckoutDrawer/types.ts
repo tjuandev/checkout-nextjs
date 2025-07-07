@@ -9,5 +9,9 @@ export interface CheckoutDrawerBodyProps {
 
 export interface CheckoutDrawerFooterProps {
   totalPrice: number
+  originalPrice: number
+  saving: number
+  freeItemsCount: number
+  appliedPromotion: boolean
   onClearCart: () => void
 }
