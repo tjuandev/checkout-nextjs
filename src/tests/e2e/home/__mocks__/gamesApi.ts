@@ -1,7 +1,6 @@
 import type { Game, GamesApiResponse } from '@/types/game'
 import type { Page } from '@playwright/test'
 
-// Mock data for consistent testing
 export const mockGames: Game[] = [
   {
     id: 1,
@@ -74,12 +73,10 @@ export const errorApiResponse = {
   message: 'Something went wrong'
 }
 
-// Helper function to setup API mocks
 export async function setupGamesApiMock(
   page: Page,
   response = mockGamesApiResponse
 ) {
-  // Mock the API response
   await page.route('**/api/games**', async (route: any) => {
     await route.fulfill({
       status: 200,
@@ -88,7 +85,6 @@ export async function setupGamesApiMock(
     })
   })
 
-  // Also mock the direct RAWG API call as fallback
   await page.route('**/api.rawg.io/api/games**', async (route: any) => {
     await route.fulfill({
       status: 200,
@@ -98,7 +94,6 @@ export async function setupGamesApiMock(
   })
 }
 
-// Helper function to setup error mock
 export async function setupErrorMock(page: Page, statusCode = 500) {
   await page.route('**/api/games**', async (route: any) => {
     await route.fulfill({
@@ -117,7 +112,6 @@ export async function setupErrorMock(page: Page, statusCode = 500) {
   })
 }
 
-// Helper function to setup empty response mock
 export async function setupEmptyMock(page: Page) {
   await setupGamesApiMock(page, emptyGamesApiResponse)
 }
